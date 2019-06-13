@@ -1,4 +1,8 @@
+/** @jsx jsx */
 import React from "react";
+import { jsx } from "@emotion/core";
+
+import Comment from "../components/comment";
 
 function Discussion() {
   return (
@@ -13,28 +17,45 @@ function Discussion() {
       </main>
 
       <article>
-        <section>
-          <div>
-            <p>Dexter Gutierres</p>
-            <p>Thu Jun 13 2019 16:34:23</p>
-            <p>Nice post</p>
-          </div>
-
-          <section>
-            <div>
-              <p>Dexter Gutierres</p>
-              <p>Thu Jun 13 2019 16:34:23</p>
-              <p>Hi I'm spamming</p>
-            </div>
-          </section>
-        </section>
-        <section>
-          <div>
-            <p>Dexter Gutierres</p>
-            <p>Thu Jun 13 2019 16:34:23</p>
-            <p>I will think about this all day</p>
-          </div>
-        </section>
+        <Comment
+          name={"Dexter Gutierres"}
+          date={"Thu Jun 13 2019 16:34:23"}
+          body={"Nice post"}
+        >
+          <Comment
+            name={"Dexter Gutierres"}
+            date={"Thu Jun 13 2019 16:34:23"}
+            body={"Nice post"}
+          >
+            <Comment
+              name={"Dexter Gutierres"}
+              date={"Thu Jun 13 2019 16:34:23"}
+              body={"Nice post"}
+            />
+          </Comment>
+        </Comment>
+        <Comment
+          name={"Dexter Gutierres"}
+          date={"Thu Jun 13 2019 16:34:23"}
+          body={"Nice post"}
+        >
+          <Comment
+            name={"Dexter Gutierres"}
+            date={"Thu Jun 13 2019 16:34:23"}
+            body={"Nice post"}
+          />
+        </Comment>
+        <Comment
+          name={"Dexter Gutierres"}
+          date={"Thu Jun 13 2019 16:34:23"}
+          body={"Nice post"}
+        >
+          <Comment
+            name={"Dexter Gutierres"}
+            date={"Thu Jun 13 2019 16:34:23"}
+            body={"Nice post"}
+          />
+        </Comment>
       </article>
     </div>
   );
