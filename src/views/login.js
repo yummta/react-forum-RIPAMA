@@ -4,10 +4,10 @@ function Login() {
   return (
     <div>
       <form onSubmit="">
-        <p>Usuario</p>
-        <input type="text" label="usuario" />
-        <p>Email</p>
-        <input type="text" label="email" />
+        <label htmlFor="username">Username</label>
+        <input id="username" type="text" name="username" placeholder="Put your username"/>
+        <label htmlFor="email">Email</label>
+        <input id="email" type="text" name="email" placeholder="Put your email"/>
       </form>
     </div>
   );
