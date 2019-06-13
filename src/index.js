@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import Login from "./views/Login";
+import Login from "./views/login";
 
-ReactDOM.render(<Login />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
