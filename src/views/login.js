@@ -5,10 +5,7 @@ function Login({ onUser }) {
   const [username, setUsername] = React.useState();
   const [email, setEmail] = React.useState();
 
-  // users : {
-  //   0 : {username: 'Paul', email : 'paul@able.com'},
-  //   1 : {username: 'Paulo', email : 'paulo@able.com}',
-  // }
+  
 
   function handleSubmit(event) {
     event.preventDefault();
