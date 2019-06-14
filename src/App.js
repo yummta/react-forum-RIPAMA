@@ -1,7 +1,12 @@
 import React from "react";
+import DiscussionList from "./views/discussion-list";
 
 function App() {
-  return <div>Hola</div>;
+  return (
+    <>
+      <DiscussionList />
+    </>
+  );
 }
 
 export default App;
