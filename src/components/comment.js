@@ -12,9 +12,11 @@ function Comment({ name, date, body, children }) {
         padding: "10px"
       }}
     >
-      <p>{name}</p>
-      <p>{date}</p>
-      <p>{body}</p>
+      <span>{name}</span>
+      <time>{date}</time>
+      <div>
+        <p>{body}</p>
+      </div>
       {children}
     </section>
   );
