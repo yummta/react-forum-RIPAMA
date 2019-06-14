@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
+import { Link } from "@reach/router";
 
 function Header() {
   return (
@@ -16,8 +17,10 @@ function Header() {
       <span css={{ marginRight: "auto" }}>Logo</span>
       <span css={{ justifySelf: "center" }}>Hi User </span>
       <div css={{ marginLeft: "auto" }}>
-        <button aria-label="New Discussion">+</button>
-        <button>LogOut</button>
+        <Link aria-label="New Discussion" to="/new">
+          New Discussion
+        </Link>
+        <a href="#">LogOut</a>
       </div>
     </header>
   );

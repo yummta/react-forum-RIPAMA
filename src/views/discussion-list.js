@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "@reach/router";
 
 function DiscussionList() {
   return (
@@ -6,9 +7,9 @@ function DiscussionList() {
       {[1, 2, 3].map((el, index) => (
         <article key={index}>
           <hr />
-          <a href="#">
+          <Link to="/discussions/detashe">
             <h2>Super interesting title about things that I liked</h2>
-          </a>
+          </Link>
           <span>Paul Portillo</span>
         </article>
       ))}

@@ -2,7 +2,7 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 
-function Default({ name, date, body, children }) {
+function NotFound({ name, date, body, children }) {
   return (
     <section
       css={{
@@ -19,4 +19,4 @@ function Default({ name, date, body, children }) {
   );
 }
 
-export default Default;
+export default NotFound;
