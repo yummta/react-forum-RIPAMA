@@ -13,7 +13,9 @@ function Discussion() {
         <h2>author</h2>
         <p>Dexter Gutierres</p>
         <h2>creation date</h2>
-        <p>Thu Jun 13 2019 16:34:23</p>
+        <date>Thu Jun 13 2019 16:34:23</date>
+        <p>New comment</p>
+        <textArea />
       </main>
 
       <article>
