@@ -14,7 +14,7 @@ function Default({ name, date, body, children }) {
         padding: "10px"
       }}
     >
-      <span> We are so so so , sorry this didn't work between us.</span>
+      <p> We are so so so , sorry this didn't work between us.</p>
     </section>
   );
 }
