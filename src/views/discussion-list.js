@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "@reach/router";
 
+
+
 function DiscussionList() {
+
+
   return (
     <section>
       {[1, 2, 3].map((el, index) => (
