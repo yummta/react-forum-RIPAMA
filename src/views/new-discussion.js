@@ -1,6 +1,6 @@
 import React from "react";
 
-function Newdiscussion() {
+function NewDiscussion() {
   return (
     <React.Fragment>
       <form>
@@ -29,4 +29,4 @@ function Newdiscussion() {
     </React.Fragment>
   );
 }
-export default Newdiscussion;
+export default NewDiscussion;

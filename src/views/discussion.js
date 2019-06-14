@@ -1,12 +1,12 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-
 import Comment from "../components/comment";
 
-function Discussion() {
+function Discussion({ id }) {
   return (
     <div>
+      <h1>{id}</h1>
       <main>
         <h1>title</h1>
         <p>Default title</p>
