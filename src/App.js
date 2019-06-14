@@ -8,11 +8,18 @@ import NotFound from "./components/not-found";
 import Header from "./components/header";
 
 function App() {
+  const [user, setUser] = React.useState(localStorage.getItem("user"));
+
+  function handleUser(value) {
+    localStorage.setItem("user", JSON.stringify(value));
+    setUser(value);
+  }
+
   return (
     <>
       <Header />
       <Router>
-        <Login path="/" />
+        <Login onUser={handleUser} path="/" />
         <DiscussionList path="/discussions" />
         <Discussion path="/discussions/:id" />
         <NewDiscussion path="/new" />
