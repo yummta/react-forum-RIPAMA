@@ -5,7 +5,7 @@ import { Link } from "@reach/router";
 
 function Header() {
   function clearStorage() {
-    localStorage.setItem("user");
+    localStorage.setItem("user", JSON.stringify({ username: "", email: "" }));
   }
 
   return (
