@@ -2,10 +2,15 @@
 import React from "react";
 import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
+import UserContext from "../contexts/user";
 
-function Header() {
-  function clearStorage() {
-    localStorage.setItem("user", JSON.stringify({ username: "", email: "" }));
+function Header({ setUser }) {
+  const user = React.useContext(UserContext);
+
+  function onLogout() {
+    const emptyUser = { username: "", email: "" };
+    localStorage.setItem("user", JSON.stringify(emptyUser));
+    setUser(emptyUser);
   }
 
   return (
@@ -19,14 +24,14 @@ function Header() {
       }}
     >
       <span css={{ marginRight: "auto" }}>Logo</span>
-      <span css={{ justifySelf: "center" }}>Hi User </span>
+      <span css={{ justifySelf: "center" }}>Hi {user.username} </span>
       <div css={{ marginLeft: "auto" }}>
         <Link aria-label="New Discussion" to="/new">
           New Discussion
         </Link>
-        <a href="/" onClick={clearStorage}>
+        <Link to="/" onClick={onLogout}>
           LogOut
-        </a>
+        </Link>
       </div>
     </header>
   );

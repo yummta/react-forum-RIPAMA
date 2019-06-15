@@ -1,5 +1,8 @@
 import React from "react";
 import { Router, Link } from "@reach/router";
+
+import { Provider as UserProvider } from "./contexts/user";
+
 import Login from "./views/login";
 import DiscussionList from "./views/discussion-list";
 import Discussion from "./views/discussion";
@@ -102,8 +105,8 @@ function App() {
   }, [comments]);
 
   return (
-    <>
-      <Header />
+    <UserProvider value={user}>
+      <Header setUser={setUser} />
       <Router>
         <Login onUser={handleUser} path="/" />
         <DiscussionList path="/discussions" discussions={discussions} />
@@ -116,7 +119,7 @@ function App() {
         />
         <NotFound default />
       </Router>
-    </>
+    </UserProvider>
   );
 }
 
