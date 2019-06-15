@@ -3,64 +3,74 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import Comment from "../components/comment";
 
-function Discussion({ id, discussions }) {
+function Discussion({ discussions, comments, id, user, setComments }) {
   const discussion = discussions[id];
+  const [commentContent, setCommentContent] = React.useState("");
+  const [username, setUsername] = React.useState("");
+
+  function handleChangeComment(event) {
+    setCommentContent(event.target.value);
+  }
+
+  function addComment(commentData, parent) {
+    setComments(state => {
+      state[parent].comments.push(state.length);
+      return [...state, commentData];
+    });
+    localStorage.setItem("comments", JSON.stringify(comments));
+  }
+
+  function handleNewComment(event) {
+    event.preventDefault();
+
+    const commentData = {
+      id: comments.length,
+      body: commentContent,
+      author: user.username,
+      date: "2019-06-02T00:45:43.963Z",
+      comments: []
+    };
+
+    addComment(commentData, id);
+    return;
+  }
+
+  function renderChildren(id, comments) {
+    return (
+      <div
+        key={id}
+        css={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
+        <Comment {...comments[id]}>
+          {comments[id].comments.map(commentId =>
+            renderChildren(commentId, comments)
+          )}
+        </Comment>
+      </div>
+    );
+  }
 
   return (
     <div>
       <main>
-        <h1>{discussion.title}</h1>
-        <div>
-          <span>By {discussion.author}</span>
-          <br />
-          <time>Publish {discussion.date}</time>
-        </div>
-        <p>{discussion.body}</p>
-        <label htmlFor="comment">Comment</label>
-        <br />
-        <textarea id="comment" placeholder="What are your thoughts?" />
+        <h1>title</h1>
+        <p>{discussions[id].title}</p>
+        <h2>author</h2>
+        <p>{discussions[id].author}</p>
+        <h2>creation date</h2>
+        <date>{discussions[id].date}</date>
+        <p>New comment</p>
+        <form onSubmit={handleNewComment}>
+          <textArea name="new-comment" onChange={handleChangeComment} />
+          <button>Create comment</button>
+        </form>
       </main>
-      <article>
-        <Comment
-          name={"Dexter Gutierres"}
-          date={"Thu Jun 13 2019 16:34:23"}
-          body={"Nice post"}
-        >
-          <Comment
-            name={"Dexter Gutierres"}
-            date={"Thu Jun 13 2019 16:34:23"}
-            body={"Nice post"}
-          >
-            <Comment
-              name={"Dexter Gutierres"}
-              date={"Thu Jun 13 2019 16:34:23"}
-              body={"Nice post"}
-            />
-          </Comment>
-        </Comment>
-        <Comment
-          name={"Dexter Gutierres"}
-          date={"Thu Jun 13 2019 16:34:23"}
-          body={"Nice post"}
-        >
-          <Comment
-            name={"Dexter Gutierres"}
-            date={"Thu Jun 13 2019 16:34:23"}
-            body={"Nice post"}
-          />
-        </Comment>
-        <Comment
-          name={"Dexter Gutierres"}
-          date={"Thu Jun 13 2019 16:34:23"}
-          body={"Nice post"}
-        >
-          <Comment
-            name={"Dexter Gutierres"}
-            date={"Thu Jun 13 2019 16:34:23"}
-            body={"Nice post"}
-          />
-        </Comment>
-      </article>
+
+      <article>{renderChildren(id, comments)}</article>
     </div>
   );
 }

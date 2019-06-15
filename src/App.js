@@ -26,7 +26,11 @@ function App() {
   }
 
   React.useEffect(() => {
-    localStorage.setItem("messages", JSON.stringify(comments));
+    localStorage.setItem("discussions", JSON.stringify(discussions));
+  }, [discussions]);
+
+  React.useEffect(() => {
+    localStorage.setItem("comments", JSON.stringify(comments));
   }, [comments]);
 
   return (
@@ -35,7 +39,13 @@ function App() {
       <Router>
         <Login onUser={handleUser} path="/" />
         <DiscussionList path="/discussions" discussions={discussions} />
-        <Discussion path="/discussions/:id" discussions={discussions} />
+        <Discussion
+          discussions={discussions}
+          setComments={setComments}
+          user={user}
+          comments={comments}
+          path="/discussions/:id"
+        />
         <NewDiscussion
           path="/new"
           discussions={discussions}
