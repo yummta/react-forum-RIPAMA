@@ -4,6 +4,10 @@ import { jsx } from "@emotion/core";
 import { Link } from "@reach/router";
 
 function Header() {
+  function clearStorage() {
+    localStorage.setItem("messages", "");
+  }
+
   return (
     <header
       css={{
@@ -20,7 +24,9 @@ function Header() {
         <Link aria-label="New Discussion" to="/new">
           New Discussion
         </Link>
-        <a href="#">LogOut</a>
+        <a href="/" onClick={clearStorage}>
+          LogOut
+        </a>
       </div>
     </header>
   );
