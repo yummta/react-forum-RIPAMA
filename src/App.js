@@ -103,7 +103,7 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header username={user.username} />
       <Router>
         <Login onUser={handleUser} path="/" />
         <DiscussionList path="/discussions" discussions={discussions} />

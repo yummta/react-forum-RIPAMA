@@ -19,7 +19,7 @@ function Header() {
       }}
     >
       <span css={{ marginRight: "auto" }}>Logo</span>
-      <span css={{ justifySelf: "center" }}>Hi User </span>
+      <span css={{ justifySelf: "center" }}>Hi {username} </span>
       <div css={{ marginLeft: "auto" }}>
         <Link aria-label="New Discussion" to="/new">
           New Discussion
