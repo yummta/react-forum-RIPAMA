@@ -83,9 +83,11 @@ const initialComments = JSON.parse(
 );
 
 function App() {
-  const [user, setUser] = React.useState(localStorage.getItem("user"));
+  const [user, setUser] = React.useState(
+    JSON.parse(localStorage.getItem("user")) || { username: "", email: "" }
+  );
   const [discussions, setDiscussions] = React.useState(
-    JSON.parse(localStorage.getItem("discussions")) || initialDiscussions
+    JSON.parse(localStorage.getItem("discussions")) || []
   );
 
   const [comments, setComments] = React.useState(initialComments);
@@ -106,7 +108,12 @@ function App() {
         <Login onUser={handleUser} path="/" />
         <DiscussionList path="/discussions" discussions={discussions} />
         <Discussion path="/discussions/:id" />
-        <NewDiscussion path="/new" />
+        <NewDiscussion
+          path="/new"
+          discussions={discussions}
+          setDiscussions={setDiscussions}
+          author={user.username}
+        />
         <NotFound default />
       </Router>
     </>
