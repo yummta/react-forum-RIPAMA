@@ -5,7 +5,7 @@ import { Link } from "@reach/router";
 
 function Header() {
   function clearStorage() {
-    localStorage.setItem("messages", "");
+    localStorage.setItem("user");
   }
 
   return (
