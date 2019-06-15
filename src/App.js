@@ -59,28 +59,28 @@ const initialComments = JSON.parse(
         body: "hola, que tal?",
         author: "Mayra",
         date: "2019-05-03T00:45:43.963Z",
-        comments: [5]
+        comments: []
       },
       {
         id: 3,
         body: "hola",
         author: "Paul",
         date: "2019-06-02T00:45:43.963Z",
-        comments: [5]
+        comments: []
       },
       {
         id: 4,
         body: "hola, que tal?",
         author: "Ricardo",
         date: "2019-06-01T00:45:43.963Z",
-        comments: [5]
+        comments: []
       },
       {
         id: 5,
         body: "hola, que tal?",
         author: "Paul",
         date: "2019-05-03T00:45:43.963Z",
-        comments: [5]
+        comments: []
       }
     ])
 );
@@ -96,11 +96,11 @@ function App() {
   }
 
   React.useEffect(() => {
-    localStorage.setItem("channels", JSON.stringify(discussions));
+    localStorage.setItem("discussions", JSON.stringify(discussions));
   }, [discussions]);
 
   React.useEffect(() => {
-    localStorage.setItem("messages", JSON.stringify(comments));
+    localStorage.setItem("comments", JSON.stringify(comments));
   }, [comments]);
 
   return (
@@ -109,7 +109,13 @@ function App() {
       <Router>
         <Login onUser={handleUser} path="/" />
         <DiscussionList path="/discussions" />
-        <Discussion path="/discussions/:id" />
+        <Discussion
+          discussions={discussions}
+          setComments={setComments}
+          user={user}
+          comments={comments}
+          path="/discussions/:id"
+        />
         <NewDiscussion path="/new" />
         <NotFound default />
       </Router>
