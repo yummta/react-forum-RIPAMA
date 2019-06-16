@@ -12,9 +12,6 @@ function Header({ setUser }) {
     localStorage.setItem("user", JSON.stringify(emptyUser));
     setUser(emptyUser);
   }
-  const BlackHover = css({
-    ":hover": { backgroundColor: "black", color: "white" }
-  });
 
   return (
     <header
@@ -58,10 +55,18 @@ function Header({ setUser }) {
           }
         }}
       >
-        <Link aria-label="New Discussion" to="/new" css={BlackHover}>
+        <Link
+          aria-label="New Discussion"
+          to="/new"
+          css={{ ":hover": { backgroundColor: "black", color: "white" } }}
+        >
           New Discussion
         </Link>
-        <Link to="/" onClick={onLogout} css={BlackHover}>
+        <Link
+          to="/"
+          onClick={onLogout}
+          css={{ ":hover": { backgroundColor: "black", color: "white" } }}
+        >
           LogOut
         </Link>
       </div>
