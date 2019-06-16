@@ -12,44 +12,48 @@ function Discussion({ discussions, comments, id, user, setComments }) {
     setCommentContent(event.target.value);
   }
 
-  function addComment(commentData, parent) {
-    setComments(state => {
-      state[parent].comments.push(state.length);
-      return [...state, commentData];
-    });
-    localStorage.setItem("comments", JSON.stringify(comments));
+  function addComment(commentData, newId) {
+    const currentComments = { ...comments };
+    currentComments[id]["comments"].push(newId);
+    const updateComments = { ...currentComments, [newId]: commentData };
+    setComments(updateComments);
+    localStorage.setItem("comments", JSON.stringify(updateComments));
   }
 
   function handleNewComment(event) {
     event.preventDefault();
-
+    const newId = Date.now();
     const commentData = {
-      id: comments.length,
+      id: newId,
+      parent: id,
       body: commentContent,
       author: user.username,
-      date: "2019-06-02T00:45:43.963Z",
+      date: newId,
       comments: []
     };
-
-    addComment(commentData, id);
+    addComment(commentData, newId);
     return;
   }
 
-  function renderChildren(id, comments) {
+  function renderChildren(idComment, comments) {
+    console.log(idComment);
     return (
       <div
-        key={id}
+        // key={idComment}
         css={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "center"
+          alignItems: "center",
+          border: "1px solid red"
         }}
       >
-        <Comment {...comments[id]}>
-          {comments[id].comments.map(commentId =>
-            renderChildren(commentId, comments)
-          )}
-        </Comment>
+        <h1>{idComment}</h1>
+        {/* <Comment {...comments[idComment]}>
+          {comments[idComment].comments.map(commentId => {
+            console.log(commentId);
+            renderChildren(commentId, comments);
+          })}
+        </Comment> */}
       </div>
     );
   }
@@ -57,19 +61,22 @@ function Discussion({ discussions, comments, id, user, setComments }) {
   return (
     <div>
       <main>
-        <h1>title</h1>
-        <p>{discussions[id].title}</p>
-        <h2>author</h2>
-        <p>{discussions[id].author}</p>
-        <h2>creation date</h2>
-        <date>{discussions[id].date}</date>
-        <p>New comment</p>
-        <form onSubmit={handleNewComment}>
-          <textArea name="new-comment" onChange={handleChangeComment} />
-          <button>Create comment</button>
-        </form>
+        <h1>{discussion.title}</h1>
+        <div>
+          <span>By {discussion.author}</span>
+          <br />
+          <time>Publish {discussion.date}</time>
+        </div>
+        <p>{discussion.body}</p>
       </main>
-
+      <form onSubmit={handleNewComment}>
+        <textarea
+          placeholder="What are your thoughts?"
+          name="new-comment"
+          onChange={handleChangeComment}
+        />
+        <button>Create comment</button>
+      </form>
       <article>{renderChildren(id, comments)}</article>
     </div>
   );

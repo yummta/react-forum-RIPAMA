@@ -3,6 +3,7 @@ import React from "react";
 import { jsx } from "@emotion/core";
 
 function Comment({ author, date, body, id, children }) {
+  console.log("wiiii", id);
   return (
     <section
       css={{
@@ -13,13 +14,10 @@ function Comment({ author, date, body, id, children }) {
         width: "70%"
       }}
     >
-      <h1>{id}</h1>
-      <span>{author}</span>
-      <time>{date}</time>
       <div>
         <p>{body}</p>
       </div>
-
+      <span>by {author}</span> | <time> date: {date}</time>
       <div
         css={{
           display: "flex",

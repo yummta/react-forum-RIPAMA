@@ -4,7 +4,13 @@ import { jsx } from "@emotion/core";
 import React from "react";
 import { Redirect } from "@reach/router";
 
-function NewDiscussion({ discussions, setDiscussions, author }) {
+function NewDiscussion({
+  discussions,
+  setDiscussions,
+  author,
+  comments,
+  setComments
+}) {
   const [title, setTitle] = React.useState("");
   const [body, setBody] = React.useState("");
   const [newId, setNewId] = React.useState(0);
@@ -14,24 +20,23 @@ function NewDiscussion({ discussions, setDiscussions, author }) {
     const dateNow = Date.now();
     const newDiscussion = {
       title,
-      body,
       author: author,
-      date: dateNow,
       id: dateNow
     };
-    const updatedDiscussions = { ...discussions, [dateNow]: newDiscussion };
-    console.log(updatedDiscussions);
-    console.log("asdas");
-    const NewDiscussion = {
-      title,
-      body,
+    const newComment = {
+      id: dateNow,
+      parent: null,
+      body: body,
       author: author,
-      date: Date.now(),
-      id: discussions.length
+      date: dateNow,
+      comments: []
     };
-    const updatedDiscussions = discussions.concat(NewDiscussion);
+    const updatedDiscussions = { ...discussions, [dateNow]: newDiscussion };
+    const updateComments = { ...comments, [dateNow]: newComment };
     localStorage.setItem("discussions", JSON.stringify(updatedDiscussions));
+    localStorage.setItem("comments", JSON.stringify(updateComments));
     setDiscussions(updatedDiscussions);
+    setComments(updateComments);
     setNewId(dateNow);
   }
 
