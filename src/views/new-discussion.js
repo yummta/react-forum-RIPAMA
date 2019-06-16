@@ -9,7 +9,13 @@ function NewDiscussion({ discussions, setDiscussions, author }) {
   function handleSubmit(event) {
     event.preventDefault();
     console.log("asdas");
-    const NewDiscussion = { title, body, author: author, date: Date.now() };
+    const NewDiscussion = {
+      title,
+      body,
+      author: author,
+      date: Date.now(),
+      id: discussions.length
+    };
     const updatedDiscussions = discussions.concat(NewDiscussion);
     localStorage.setItem("discussions", JSON.stringify(updatedDiscussions));
     setDiscussions(updatedDiscussions);
@@ -48,6 +54,6 @@ function NewDiscussion({ discussions, setDiscussions, author }) {
       </React.Fragment>
     );
   }
-  return <Redirect to="/discussions/asda" noThrow />;
+  return <Redirect to={`/discussions/${discussions.length - 1}`} noThrow />;
 }
 export default NewDiscussion;
