@@ -11,10 +11,9 @@ function Login({ onUser }) {
 
   React.useEffect(() => {
     if (user.username) {
-      console.log("wiiiii");
       setLogged(true);
     }
-  });
+  }, [user]);
 
   function handleSubmit(event) {
     event.preventDefault();
