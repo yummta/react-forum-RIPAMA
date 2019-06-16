@@ -21,6 +21,15 @@ function NewDiscussion({ discussions, setDiscussions, author }) {
     };
     const updatedDiscussions = { ...discussions, [dateNow]: newDiscussion };
     console.log(updatedDiscussions);
+    console.log("asdas");
+    const NewDiscussion = {
+      title,
+      body,
+      author: author,
+      date: Date.now(),
+      id: discussions.length
+    };
+    const updatedDiscussions = discussions.concat(NewDiscussion);
     localStorage.setItem("discussions", JSON.stringify(updatedDiscussions));
     setDiscussions(updatedDiscussions);
     setNewId(dateNow);
