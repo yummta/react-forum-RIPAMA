@@ -3,19 +3,22 @@ import React from "react";
 import { jsx } from "@emotion/core";
 import Comment from "../components/comment";
 
-function Discussion({ id }) {
+function Discussion({ id, discussions }) {
+  const discussion = discussions[id];
+
   return (
     <div>
-      <h1>{id}</h1>
       <main>
-        <h1>title</h1>
-        <p>Default title</p>
-        <h2>author</h2>
-        <p>Dexter Gutierres</p>
-        <h2>creation date</h2>
-        <date>Thu Jun 13 2019 16:34:23</date>
-        <p>New comment</p>
-        <textArea />
+        <h1>{discussion.title}</h1>
+        <div>
+          <span>By {discussion.author}</span>
+          <br />
+          <time>Publish {discussion.date}</time>
+        </div>
+        <p>{discussion.body}</p>
+        <label htmlFor="comment">Comment</label>
+        <br />
+        <textarea id="comment" placeholder="What are your thoughts?" />
       </main>
 
       <article>

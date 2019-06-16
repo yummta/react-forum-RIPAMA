@@ -2,10 +2,11 @@ import React from "react";
 import { Link } from "@reach/router";
 
 function DiscussionList({ discussions }) {
-  if (discussions.length) {
+  console.log(discussions);
+  if (Object.keys(discussions).length) {
     return (
       <section>
-        {discussions.map(discussion => (
+        {Object.values(discussions).map(discussion => (
           <article key={discussion.id}>
             <hr />
             <Link to={`/discussions/${discussion.id}`}>
