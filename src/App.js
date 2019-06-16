@@ -1,8 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
-
 import { Provider as UserProvider } from "./contexts/user";
-
 import Login from "./views/login";
 import DiscussionList from "./views/discussion-list";
 import Discussion from "./views/discussion";

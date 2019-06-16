@@ -20,7 +20,6 @@ function Discussion({ id, discussions }) {
         <br />
         <textarea id="comment" placeholder="What are your thoughts?" />
       </main>
-
       <article>
         <Comment
           name={"Dexter Gutierres"}
