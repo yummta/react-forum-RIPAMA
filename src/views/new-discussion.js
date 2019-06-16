@@ -4,16 +4,23 @@ import { Redirect } from "@reach/router";
 function NewDiscussion({ discussions, setDiscussions, author }) {
   const [title, setTitle] = React.useState("");
   const [body, setBody] = React.useState("");
-  const [complete, setComplete] = React.useState(false);
+  const [newId, setNewId] = React.useState(0);
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log("asdas");
-    const NewDiscussion = { title, body, author: author, date: Date.now() };
-    const updatedDiscussions = discussions.concat(NewDiscussion);
+    const dateNow = Date.now();
+    const newDiscussion = {
+      title,
+      body,
+      author: author,
+      date: dateNow,
+      id: dateNow
+    };
+    const updatedDiscussions = { ...discussions, [dateNow]: newDiscussion };
+    console.log(updatedDiscussions);
     localStorage.setItem("discussions", JSON.stringify(updatedDiscussions));
     setDiscussions(updatedDiscussions);
-    setComplete(true);
+    setNewId(dateNow);
   }
 
   function handleChange(event) {
@@ -21,7 +28,7 @@ function NewDiscussion({ discussions, setDiscussions, author }) {
     event.target.name === "title" ? setTitle(value) : setBody(value);
   }
 
-  if (!complete) {
+  if (!newId) {
     return (
       <React.Fragment>
         <form onSubmit={handleSubmit}>
@@ -48,6 +55,6 @@ function NewDiscussion({ discussions, setDiscussions, author }) {
       </React.Fragment>
     );
   }
-  return <Redirect to="/discussions/asda" noThrow />;
+  return <Redirect to={`/discussions/${newId}`} noThrow />;
 }
 export default NewDiscussion;
