@@ -41,7 +41,6 @@ function App() {
         <Login onUser={handleUser} path="/" />
         <DiscussionList path="/discussions" discussions={discussions} />
         <Discussion
-          discussions={discussions}
           setComments={setComments}
           user={user}
           comments={comments}

@@ -1,85 +1,99 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import Comment from "../components/comment";
 
-function Discussion({ discussions, comments, id, user, setComments }) {
-  const discussion = discussions[id];
+function Discussion({ comments, id, user, setComments }) {
+  const commentStyle = {
+    border: "1px solid red",
+    paddingLeft: "8px"
+  };
+
+  const discussionStyle = {
+    border: "1px solid blue"
+  };
+
   const [commentContent, setCommentContent] = React.useState("");
-  const [username, setUsername] = React.useState("");
 
   function handleChangeComment(event) {
     setCommentContent(event.target.value);
   }
 
-  function addComment(commentData, newId) {
+  function addComment(newComment, idParent) {
     const currentComments = { ...comments };
-    currentComments[id]["comments"].push(newId);
-    const updateComments = { ...currentComments, [newId]: commentData };
+    currentComments[idParent]["comments"].push(newComment.id);
+    const updateComments = {
+      ...currentComments,
+      [newComment.id]: newComment
+    };
     setComments(updateComments);
     localStorage.setItem("comments", JSON.stringify(updateComments));
   }
 
   function handleNewComment(event) {
     event.preventDefault();
+    const currentId = event.target.dataset.id;
     const newId = Date.now();
-    const commentData = {
+    const newComment = {
       id: newId,
-      parent: id,
+      parent: currentId,
       body: commentContent,
       author: user.username,
       date: newId,
       comments: []
     };
-    addComment(commentData, newId);
-    return;
+    addComment(newComment, currentId);
   }
 
-  function renderChildren(idComment, comments) {
-    console.log(idComment);
+  function renderChildren(idComment) {
+    let currentComment = comments[idComment];
+
     return (
-      <div
-        // key={idComment}
-        css={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          border: "1px solid red"
-        }}
-      >
-        <h1>{idComment}</h1>
-        {/* <Comment {...comments[idComment]}>
-          {comments[idComment].comments.map(commentId => {
-            console.log(commentId);
-            renderChildren(commentId, comments);
-          })}
-        </Comment> */}
-      </div>
+      <>
+        {currentComment.parent ? (
+          <>
+            <div key={idComment} css={commentStyle}>
+              <span>{comments[idComment]["body"]}</span>
+              <form onSubmit={handleNewComment} data-id={idComment}>
+                <textarea
+                  placeholder="What are your thoughts?"
+                  name="new-comment"
+                  onChange={handleChangeComment}
+                />
+                <button>Create comment</button>
+              </form>
+              {comments[idComment]["comments"].map(currenId => {
+                return renderChildren(currenId);
+              })}
+            </div>
+          </>
+        ) : (
+          <>
+            <div key={idComment} css={discussionStyle}>
+              <h1>{currentComment.title}</h1>
+              <div>
+                <span>By {currentComment.author} | </span>
+                <span>date: {currentComment.date}</span>
+              </div>
+              <p>{currentComment.body}</p>
+              <form onSubmit={handleNewComment} data-id={idComment}>
+                <textarea
+                  placeholder="What are your thoughts?"
+                  name="new-comment"
+                  onChange={handleChangeComment}
+                />
+                <button>Create comment</button>
+              </form>
+              {comments[idComment]["comments"].map(currenId => {
+                return renderChildren(currenId);
+              })}
+            </div>
+          </>
+        )}
+      </>
     );
   }
 
-  return (
-    <div>
-      <main>
-        <h1>{discussion.title}</h1>
-        <div>
-          <span>By {discussion.author}</span>
-          <br />
-          <time>Publish {discussion.date}</time>
-        </div>
-        <p>{discussion.body}</p>
-      </main>
-      <form onSubmit={handleNewComment}>
-        <textarea
-          placeholder="What are your thoughts?"
-          name="new-comment"
-          onChange={handleChangeComment}
-        />
-        <button>Create comment</button>
-      </form>
-      <article>{renderChildren(id, comments)}</article>
-    </div>
-  );
+  return <article>{renderChildren(id)}</article>;
 }
 
 export default Discussion;
